@@ -21,6 +21,22 @@ const postRegister=(req,res)=>{
     console.log(email)
     console.log(password)
    console.log(confirm_password)
+   //Data validation
+   const errors=[];
+   if(!name||!email||!password||!confirm_password){
+       errors.push("All fields are required")
+   }
+   if(password.length<6){
+       errors.push("Password atleast 6 characters")
+   }
+   if(password!==confirm_password){
+       errors.push("Passwords do not match")
+   }
+   if(errors.length>0){
+       console.log(errors)
+   }else{
+       res.redirect('/users.login')
+   }
 
 }
 
