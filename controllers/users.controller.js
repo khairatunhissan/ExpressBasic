@@ -33,10 +33,16 @@ const postRegister=(req,res)=>{
        errors.push("Passwords do not match")
    }
    if(errors.length>0){
+<<<<<<< HEAD
        req.flash('errors',errors)
        res.redirect('/users/register')
    }else{
        res.redirect('/users/login')
+=======
+       console.log(errors)
+   }else{
+       res.redirect('/users.login')
+>>>>>>> e9d30ac263a6761c638acdc8fb23d78daa3d5017
    }
 
 }
