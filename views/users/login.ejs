@@ -9,6 +9,9 @@
     <div class="card-header text-center">
       <a href="/" class="h1"><b>ICT Fest</b>2021</a>
     </div>
+    <%if(error.length>0){%>
+      <div class="alert alert-danger"><%=error%></div>
+      <%}%>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
