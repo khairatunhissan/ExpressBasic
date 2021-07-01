@@ -6,6 +6,11 @@ const flash =require('connect-flash')
 const indexRoutes=require('./routes/index.routes')
 const userRoutes=require('./routes/users.routes')
 const mongoose=require('mongoose')
+const passport=require('passport')
+
+//passport Strategy
+require('./config/passport')(passport)
+
 
 //connect to db
 mongoose.connect(process.env.MongoURI,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{
@@ -26,6 +31,8 @@ app.use(session({
     saveUninitialized:true
 }))
 app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(express.urlencoded({extended:false}))
 app.use(indexRoutes)
