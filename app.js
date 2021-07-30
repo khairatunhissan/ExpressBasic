@@ -5,6 +5,7 @@ const session=require('express-session')
 const flash =require('connect-flash')
 const indexRoutes=require('./routes/index.routes')
 const userRoutes=require('./routes/users.routes')
+const MORoutes=require('./routes/mathOlympiad.routes')
 const mongoose=require('mongoose')
 const passport=require('passport')
 
@@ -37,5 +38,6 @@ app.use(passport.session())
 app.use(express.urlencoded({extended:false}))
 app.use(indexRoutes)
 app.use('/users',userRoutes)
+app.use('/MathOlympiad',MORoutes)
 
 module.exports = app
