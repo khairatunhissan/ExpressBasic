@@ -103,5 +103,59 @@ const deleteMO=(req,res)=>{
   
 }
 
-module.exports={getMO,postMO,getMOList, deleteMO}
+const paymentDoneMO =(req,res)=>{
+    const id=req.params.id
+
+    MathOlympiad.findOne({_id:id})
+    .then((participant)=>{
+        participant.paid=participant.total
+        participant.save().then(()=>{
+            let error="Payment completed succesfully"
+            req.flash('error',error)
+            res.redirect('/MathOlympiad/list')
+        })
+        .catch(()=>{
+            let error="Data could not be updated"
+            req.flash('error',error)
+            res.redirect("/MathOlympiad/list")
+        })
+    })
+    .catch(()=>{
+        let error="Data could not be updated"
+        req.flash('error',error)
+        res.redirect("/MathOlympiad/list")
+
+    })
+}
+
+const selectMO =(req,res)=>{
+    const id=req.params.id
+
+    MathOlympiad.findOne({_id:id})
+    .then((participant)=>{
+        participant.selected=true
+        participant.save().then(()=>{
+            let error="Participant has been selcted succesfully"
+            req.flash('error',error)
+            res.redirect('/MathOlympiad/list')
+        })
+        .catch(()=>{
+            let error="Data could not be updated"
+            req.flash('error',error)
+            res.redirect("/MathOlympiad/list")
+        })
+    })
+    .catch(()=>{
+        let error="Data could not be updated"
+        req.flash('error',error)
+        res.redirect("/MathOlympiad/list")
+
+    })
+}
+
+
+
+
+
+module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO}
 
