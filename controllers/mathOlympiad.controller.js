@@ -36,7 +36,7 @@ const postMO=(req,res)=>{
              error="Participant with same name and contact exists"
              
              req.flash('error',error)
-             res.redirect('register')
+             res.redirect('/MathOlympiad/register')
          }else{
              const participant=new MathOlympiad({
                  name,
@@ -52,11 +52,11 @@ const postMO=(req,res)=>{
              participant.save().then(()=>{
                 error='Participant has been registered successfully!!'
                 req.flash('error',error)
-                res.redirect('register')
+                res.redirect('/MathOlympiad/register')
              }).catch(()=>{
                 error='Unexpected error'
                 req.flash('error',error)
-                res.redirect('register')
+                res.redirect('/MathOlympiad/register')
 
 
              })
@@ -86,9 +86,21 @@ const getMOList=(req,res)=>{
 }
 
 const deleteMO=(req,res)=>{
+    let error=''
     const id=req.param.id
-    console.log(id)
-    res.render('math-olympiad/list.ejs')
+    
+    MathOlympiad.deleteOne({_id:req.params.id}).then(()=>{
+        error='Data has been deleted successfully!'
+            req.flash('error',error)
+            res.redirect('/MathOlympiad/list')
+
+    }).catch(()=>{
+        error='Failed to delete data!'
+            req.flash('error',error)
+            res.redirect('/MathOlympiad/list')
+
+    })
+  
 }
 
 module.exports={getMO,postMO,getMOList, deleteMO}
