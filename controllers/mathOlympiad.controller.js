@@ -7,12 +7,7 @@ const getMO=(req,res)=>{
 
 const postMO=(req,res)=>{
     const{name,category,contact,email,institution,tshirt}=req.body
-    console.log(name)
-    console.log(category)
-    console.log(contact)
-    console.log(email)
-    console.log(institution)
-    console.log(tshirt)
+    
 
     let registrationFee=0
     if(category=='School')

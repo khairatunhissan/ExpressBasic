@@ -13,6 +13,18 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
+          <br/>
+
+          <% let success= 'Data has been deleted successfully!'%>
+          <% let success2= 'Payment completed succesfully'%>
+          <% let success3= 'Participant has been selcted succesfully'%>
+          
+            <% if (error.length>0) {if (error==success||success2||success3){%>
+              <div class="alert alert-success"><%=error%></div>
+              <%}else{%>
+              <div class="alert alert-danger"><%=error%></div> 
+              <%}%> <%}%>
+
             <div class="row">
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
@@ -20,30 +32,82 @@
 
           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
             <thead>
+              
               <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-                <th>Extn.</th>
-                <th>E-mail</th>
+                <th>Team<br/>Name</th>
+                <th>Institute</th>
+                <th>Name</th>
+                <th>Contact<br/>No.</th>
+                <th>Email</th>
+                <th>T-shirt</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Selected</th>
+                <th>Payment<br/> Status</th>
+                <th>Select</th>
+                <th>Payment<br/> Done</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
+              <%if(participants.length>0){ participants.forEach(participant=>{%>
               <tr>
-                <td>Tiger</td>
-                <td>Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>5421</td>
-                <td>t.nixon@datatables.net</td>
+                <td rowspan="4"><%=participant.teamname%></td>
+                <td rowspan="4"><%=participant.institution%></td>
+                <td ><%=participant.coachname%></td>
+                <td ><%=participant.coachcontact%></td>
+                <td ><%=participant.coachemail%></td>
+                <td ><%=participant.coachtshirt%></td>
+                <td rowspan="4"><%=participant.total%></td>
+                <td rowspan="4"><%=participant.paid%></td>
+                <td rowspan="4">Selected</td>
+                <td  rowspan="4"><%if(participant.paid==participant.total){%>
+                  <p style="color: green;">Successful</p>
+                   <%}else{%> 
+                     <p style="color: brown;">Incomplete </p> 
+                     <%}%>
+                  
+                
+                </td>
+                <td rowspan="4">'
+                  <% const selectURL= 'select/'+ participant._id %>
+                  <a href="<%= selectURL %>"><i class="fa fa-check"></i><span class="fa fa-chevron"></span></a></td>
+                <td rowspan="4">
+                  <% const paymentDoneURL= 'paymentDone/'+ participant._id %>
+                  <a href="<%= paymentDoneURL %>"><i class="fa fa-money"></i><span class="fa fa-chevron"></span></a>
+                </td>
+                <td rowspan="4">
+                  <% const editURL= 'edit/'+ participant._id %>
+                   <a href="<%= editURL%>"><i class="fa fa-pencil"></i><span class="fa fa-chevron"></span></a>
+                </td>
+                <td rowspan="4">
+                  <% const deleteURL= 'delete/'+ participant._id %>
+                  <a href="<%= deleteURL%>"><i class="fa fa-trash"></i><span class="fa fa-chevron"></span></a>
+                </td>
               </tr>
+              <tr>
+                <td ><%=participant.leadername%></td>
+                <td ><%=participant.leadercontact%></td>
+                <td ><%=participant.leaderemail%></td>
+                <td ><%=participant.leadertshirt%></td>
+
+              </tr>
+              <tr>
+                <td ><%=participant.member1name%></td>
+                <td ><%=participant.member1contact%></td>
+                <td ><%=participant.member1email%></td>
+                <td ><%=participant.member1tshirt%></td>
+
+              </tr>
+              <tr>
+                <td ><%=participant.member2name%></td>
+                <td ><%=participant.member2contact%></td>
+                <td ><%=participant.member2email%></td>
+                <td ><%=participant.member2tshirt%></td>
+
+              </tr>
+              <%  }) }%>
               
             </tbody>
           </table>

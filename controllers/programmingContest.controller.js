@@ -7,24 +7,7 @@ const getPC=(req,res)=>{
 
 const postPC=(req,res)=>{
     const{teamname,institution,coachname,coachcontact,coachemail,coachtshirt,leadername,leadercontact,leaderemail,leadertshirt,member1name,member1contact,member1email,member1tshirt,member2name,member2contact,member2email,member2tshirt}=req.body
-    console.log(teamname)
-    console.log(institution)
-    console.log(coachname)
-    console.log(coachcontact)
-    console.log(coachemail)
-    console.log(coachtshirt)
-    console.log(leadername)
-    console.log(leadercontact)
-    console.log(leaderemail)
-    console.log(leadertshirt)
-    console.log(member1name)
-    console.log(member1contact)
-    console.log(member1email)
-    console.log(member1tshirt)
-    console.log(member2name)
-    console.log(member2contact)
-    console.log(member2email)
-    console.log(member2tshirt)
+    
 
     const total=500
      const paid=0
@@ -78,19 +61,64 @@ const postPC=(req,res)=>{
 }
 
 const getPCList=(req,res)=>{
-    res.render('programming-contest/list.ejs')
+    let all_participant=[]
+    let error =""
+    ProgrammingContest.find().then((data)=>{
+        all_participant=data
+        res.render('programming-contest/list.ejs',{
+            error:req.flash('error'),
+            participants:all_participant,
+        })
+
+    }).catch(()=>{
+        error='Failed to fetch participants'
+        res.render('programming-contest/list.ejs',{
+            error:req.flash('error',error),
+            participants:all_participant,
+        })
+    })
 }
 
 const deletePC=(req,res)=>{
-    const id =req.params.id
-    console.log(id)
-    res.render('programming-contest/list.ejs')
+    let error=''
+    const id=req.param.id
+    
+    ProgrammingContest.deleteOne({_id:req.params.id}).then(()=>{
+        error='Data has been deleted successfully!'
+            req.flash('error',error)
+            res.redirect('/ProgrammingContest/list')
+
+    }).catch(()=>{
+        error='Failed to delete data!'
+            req.flash('error',error)
+            res.redirect('/ProgrammingContest/list')
+
+    })
 }
 
 const paymentDonePC=(req,res)=>{
-    const id =req.params.id
-    console.log(id)
-    res.render('programming-contest/list.ejs')
+    const id=req.params.id
+
+    ProgrammingContest.findOne({_id:id})
+    .then((participant)=>{
+        participant.paid=participant.total
+        participant.save().then(()=>{
+            let error="Payment completed succesfully"
+            req.flash('error',error)
+            res.redirect('/ProgrammingContest/list')
+        })
+        .catch(()=>{
+            let error="Data could not be updated"
+            req.flash('error',error)
+            res.redirect("/ProgrammingContest/list")
+        })
+    })
+    .catch(()=>{
+        let error="Data could not be updated"
+        req.flash('error',error)
+        res.redirect("/ProgrammingContest/list")
+
+    })
 }
 
 const selectPC=(req,res)=>{
