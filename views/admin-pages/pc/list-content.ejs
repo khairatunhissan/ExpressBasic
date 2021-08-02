@@ -17,7 +17,7 @@
 
           <% let success= 'Data has been deleted successfully!'%>
           <% let success2= 'Payment completed succesfully'%>
-          <% let success3= 'Participant has been selcted succesfully'%>
+          <% let success3= 'Team has been selcted succesfully'%>
           
             <% if (error.length>0) {if (error==success||success2||success3){%>
               <div class="alert alert-success"><%=error%></div>
@@ -61,7 +61,13 @@
                 <td ><%=participant.coachtshirt%></td>
                 <td rowspan="4"><%=participant.total%></td>
                 <td rowspan="4"><%=participant.paid%></td>
-                <td rowspan="4">Selected</td>
+                <td rowspan="4">
+                  <%if(participant.selected==true){%>
+                  <p style="color: green;">Yes</p>
+                   <%}else{%> 
+                     <p style="color: brown;">No</p> 
+                     <%}%>
+                    </td>
                 <td  rowspan="4"><%if(participant.paid==participant.total){%>
                   <p style="color: green;">Successful</p>
                    <%}else{%> 
