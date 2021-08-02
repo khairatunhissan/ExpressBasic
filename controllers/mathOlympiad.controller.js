@@ -149,8 +149,30 @@ const selectMO =(req,res)=>{
 }
 
 
+const editMO =(req,res)=>{
+    const id=req.params.id
+    MathOlympiad.findOne({_id:id})
+    .then((participant)=>{
+        
+        participant.save().then(()=>{
+            
+        })
+        .catch(()=>{
+            let error="Data could not be updated"
+            req.flash('error',error)
+            res.redirect("/MathOlympiad/list")
+        })
+    })
+    .catch(()=>{
+        let error="Data could not be updated"
+        req.flash('error',error)
+        res.redirect("/MathOlympiad/list")
+
+    })
+
+}
 
 
 
-module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO}
+module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,editMO}
 
