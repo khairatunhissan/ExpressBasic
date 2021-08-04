@@ -15,7 +15,7 @@ require('./config/passport')(passport)
 
 
 //connect to db
-mongoose.connect(process.env.MongoURI,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{
+mongoose.connect(process.env.MongoURI,{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false,useCreateIndex:true}).then(()=>{
 console.log('Mongodb Connected')
 }).catch(()=>{
     console.log(error)
