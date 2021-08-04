@@ -1,0 +1,194 @@
+<div class="right_col" role="main">
+    <div class="">
+      
+      <div class="clearfix"></div>
+  
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2> Programming Contest<small>Edit Participant</small></h2>
+              
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+  
+              <% let success= 'Team has been registered successfully'%>
+              <% if (error.length>0) {if (error==success){%>
+                <div class="alert alert-success"><%=error%></div>
+                <%}else{%>
+                <div class="alert alert-danger"><%=error%></div> 
+                <%}%> <%}%>
+                
+              <form 
+              method="POST"
+              action="/ProgrammingContest/edit"
+              id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+  
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control has-feedback-left" id="teamname" name="teamname" value="<%=participant.teamname%>" required="required" placeholder="Team Name">
+                    
+                  </div>
+  
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="institution" name="institution" value="<%=participant.institution%>" required="required" placeholder="Institution Name">
+                   
+                  </div>
+                </div>
+                <h2>Information Regarding the Coach</h2>
+                
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="coachname" name="coachname" value="<%=participant.coachname%>" required="required" placeholder="Name of the Coach">
+                    
+                  </div>
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="coachcontact" name="coachcontact" value="<%=participant.coachcontact%>" required="required" placeholder="Contact No. of the Coach">
+                    
+                  </div>
+                  
+                </div>
+               
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="coachemail" name="coachemail" value="<%=participant.coachemail%>" placeholder="Email of the Coach">
+                    
+                  </div>
+                  
+                </div>
+  
+                
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <h7>T-shirt size of the Coach</h7>
+                    <select class="form-control" id="coachtshirt" name="coachtshirt">
+                        <option disabled value="<%=participant.coachtshirt%>"><%=participant.coachtshirt%></option>
+                      <option value="M">Medium</option>
+                      <option value="L">Large</option>
+                      <option value="XL">Extra Large</option>
+                    </select>
+                  </div>
+                </div>
+  
+              <h2>Information Regarding Team Leader</h2>
+                
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="leadername" name="leadername" value="<%=participant.leadername%>" required="required" placeholder="Name of the Team Leader">
+                    
+                  </div>
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="leadercontact" name="leadercontact" value="<%=participant.leadercontact%>" required="required" placeholder="Contact No. of the Team Leader">
+                    
+                  </div>
+                  
+                </div>
+               
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="leaderemail" name="leaderemail" value="<%=participant.leaderemail%>" placeholder="Email of the Team Leader">
+                    
+                  </div>
+                  
+                </div>
+  
+                <div class="item form-group">
+                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                  <h7>T-shirt size of Team Leader</h7>
+                  <select class="form-control" id="leadertshirt" name="leadertshirt">
+                    <option disabled value="<%=participant.leadertshirt%>"><%=participant.leadertshirt%></option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">Extra Large</option>
+                  </select>
+                </div>
+              </div>
+  
+              <h2>Information Regarding Member-1</h2>
+                
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="member1name" name="member1name" value="<%=participant.member1name%>" required="required" placeholder="Name of Member-1">
+                    
+                  </div>
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="member1contact" name="member1contact" value="<%=participant.memner1contact%>" required="required" placeholder="Contact No. of Member-1">
+                    
+                  </div>
+                  
+                </div>
+               
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6  form-group has-feedback">
+                    <input type="text" class="form-control" id="member1email" name="member1email" value="<%=participant.member1email%>" placeholder="Email of Member-1 ">
+                    
+                  </div>
+                  
+                </div>
+  
+                <div class="item form-group">
+                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                  <h7>T-shirt size of the Member-1</h7>
+                  <select class="form-control" id="member1tshirt" name="member1tshirt">
+                    <option disabled value="<%=participant.member1tshirt%>"><%=participant.member1tshirt%></option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">Extra Large</option>
+                  </select>
+                </div>
+              </div>
+  
+              <h2>Information Regarding Member-2</h2>
+                
+              <div class="item form-group">
+                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                  <input type="text" class="form-control" id="member2name" name="member2name" value="<%=participant.member2name%>" required="required" placeholder="Name of Member-2">
+                  
+                </div>
+                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                  <input type="text" class="form-control" id="member2contact" name="member2contact" value="<%=participant.member2contact%>" required="required" placeholder="Contact No. of Member-2">
+                  
+                </div>
+                
+              </div>
+             
+              <div class="item form-group">
+                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                  <input type="text" class="form-control" id="member2email" name="member2email" value="<%=participant.member2email%>" placeholder="Email of Member-2 ">
+                  
+                </div>
+                
+              </div>
+  
+              <div class="item form-group">
+              <div class="col-md-6 col-sm-6  form-group has-feedback">
+                <h7>T-shirt size of the Member-2</h7>
+                <select class="form-control" id="member2tshirt" name="member2tshirt">
+                    <option disabled value="<%=participant.member2tshirt%>"><%=participant.member2tshirt%></option>
+                  <option value="M">Medium</option>
+                  <option value="L">Large</option>
+                  <option value="XL">Extra Large</option>
+                </select>
+              </div>
+            </div>
+  
+  
+                
+                <div class="ln_solid"></div>
+                <div class="item form-group">
+                  <div class="col-md-6 col-sm-6 offset-md-3">
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                  </div>
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

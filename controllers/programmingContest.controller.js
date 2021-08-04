@@ -146,6 +146,30 @@ const selectPC=(req,res)=>{
     })
 }
 
+const geteditPC=(req,res)=>{
+    const id =req.params.id
+    let participantInfo=[]
+    let error =""
+    ProgrammingContest.findOne({_id:id})
+    .then((data)=>{
+        participantInfo=data
+        res.render('programming-contest/edit.ejs',{
+            error:req.flash('error'),
+            participant:participantInfo,
+        })
 
+    }).catch(()=>{
+        error='Failed to fetch participants'
+        res.render('programming-contest/edit.ejs',{
+            error:req.flash('error',error),
+            participants:participantInfo,
+        })
+    })
+}
 
-module.exports={getPC,postPC,getPCList,deletePC,paymentDonePC,selectPC}
+const posteditPC=(req,res)=>{
+    res.render('programming-contest/edit.ejs')
+    
+}
+
+module.exports={getPC,postPC,getPCList,deletePC,paymentDonePC,selectPC,geteditPC,posteditPC}
