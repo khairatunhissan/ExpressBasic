@@ -179,9 +179,16 @@ const posteditMO = async (req, res) => {
       { category, email, institution, tshirt }
     )
     .then((data)=>{
+        if(data==req.params.teamname||data==req.params.coachname){
+            error="Participant's name and contact number cannot be edited"
+            req.flash('error',error)
+            res.redirect("/MathOlympiad/list")
+        }
+        else{
       error="Participant has been edited successfully!!"
         req.flash('error',error)
         res.redirect("/MathOlympiad/list")
+    }
     }).catch(()=>{
         error="Unexpected Error"
         req.flash('error',error)
