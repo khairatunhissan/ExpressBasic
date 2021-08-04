@@ -171,8 +171,25 @@ const geteditMO =(req,res)=>{
 }
 
 
+const posteditMO = async (req, res) => {
+    const { name, contact, category, email, institution, tshirt } = req.body;
+  
+    const data = await MathOlympiad.findOneAndUpdate(
+      { name: name, contact: contact },
+      { category, email, institution, tshirt }
+    )
+    .then((data)=>{
+      error="Participant has been edited successfully!!"
+        req.flash('error',error)
+        res.redirect("/MathOlympiad/list")
+    }).catch(()=>{
+        error="Unexpected Error"
+        req.flash('error',error)
+        res.redirect("/MathOlympiad/list")
+    })
+    
+  };
 
 
-
-module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,geteditMO}
+module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,geteditMO,posteditMO}
 

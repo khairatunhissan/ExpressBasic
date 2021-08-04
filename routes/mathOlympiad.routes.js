@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const {ensureAuthenticated,addUserData}=require('./../middlewares/auth.middleware')
-const{getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,geteditMO}=require('./../controllers/mathOlympiad.controller')
+const{getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,geteditMO,posteditMO}=require('./../controllers/mathOlympiad.controller')
 const { route } = require('./index.routes')
 
 router.get('/register',ensureAuthenticated,addUserData,getMO)
@@ -11,7 +11,7 @@ router.get('/delete/:id',ensureAuthenticated,addUserData,deleteMO)
 router.get('/paymentDone/:id',ensureAuthenticated,addUserData,paymentDoneMO)
 router.get('/select/:id',ensureAuthenticated,addUserData,selectMO)
 router.get('/edit/:id',ensureAuthenticated,addUserData,geteditMO)
-//router.post('/edit',ensureAuthenticated,addUserData,posteditMO)
+router.post('/edit',ensureAuthenticated,addUserData,posteditMO)
 
 
 module.exports=router
