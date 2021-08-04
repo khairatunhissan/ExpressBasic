@@ -188,7 +188,7 @@ const posteditMO = async (req, res) => {
         res.redirect("/MathOlympiad/list")
     })
     
-  };
+  }
 
 
 module.exports={getMO,postMO,getMOList, deleteMO,paymentDoneMO,selectMO,geteditMO,posteditMO}

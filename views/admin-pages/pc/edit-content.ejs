@@ -14,9 +14,11 @@
             <div class="x_content">
               <br />
   
-              <% let success= 'Team has been registered successfully'%>
+              <% let success= 'Team has been edited successfully!!'%>
+             
               <% if (error.length>0) {if (error==success){%>
                 <div class="alert alert-success"><%=error%></div>
+               
                 <%}else{%>
                 <div class="alert alert-danger"><%=error%></div> 
                 <%}%> <%}%>
@@ -114,7 +116,7 @@
                     
                   </div>
                   <div class="col-md-6 col-sm-6  form-group has-feedback">
-                    <input type="text" class="form-control" id="member1contact" name="member1contact" value="<%=participant.memner1contact%>" required="required" placeholder="Contact No. of Member-1">
+                    <input type="text" class="form-control" id="member1contact" name="member1contact" value="<%=participant.member1contact%>" required="required" placeholder="Contact No. of Member-1">
                     
                   </div>
                   
