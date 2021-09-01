@@ -40,7 +40,12 @@ const MOSchema=new mongoose.Schema({
     date:{
         type:Date,
         default:Date.now,
-    }
+    },
+    verificationCode: {
+        type: String,
+        required: true,
+        unique: true,
+      },
 })
 
 const MathOlympiad=mongoose.model('MathOlympiad',MOSchema)

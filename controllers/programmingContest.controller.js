@@ -1,4 +1,7 @@
 const ProgrammingContest=require('../models/ProgrammingContest.model')
+const sendMails = require('../config/email');
+var crypto = require('crypto');
+
 
 const getPC=(req,res)=>{
     res.render('programming-contest/register.ejs',{error:req.flash('error')})
