@@ -88,7 +88,12 @@ const PCSchema=new mongoose.Schema({
     date:{
         type:Date,
         default:Date.now,
-    }
+    },
+    verificationCode: {
+        type: String,
+        required: true,
+        unique: true,
+      },
 })
 
 const ProgrammingContest=mongoose.model('ProgrammingContest',PCSchema)

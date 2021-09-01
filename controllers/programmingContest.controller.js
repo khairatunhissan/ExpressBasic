@@ -16,6 +16,7 @@ const postPC=(req,res)=>{
      const paid=0
      const selected=false
      let error=""
+     var verificationCode = crypto.randomBytes(20).toString('hex');
 
      ProgrammingContest.findOne({teamname:teamname,coachname:coachname}).then((participant)=>{
          if(participant){
@@ -46,9 +47,25 @@ const postPC=(req,res)=>{
                 paid,
                 total,
                 selected,
+                verificationCode
              })
              participant.save().then(()=>{
                 error="Team has been registered successfully"
+
+                let allEmails = [leaderemail, member2email, member1email, coachemail];
+                const mailOptions = {
+                    from: 'ictfest7@gmail.com',
+                    to: allEmails,
+                    subject: 'Registration on ICT Fest 2021',
+                    text:
+                      'Your team has been registered successfully for Programming contest. This is the verification Code: ' +
+                      verificationCode,
+                  };
+      
+                  sendMails(mailOptions);
+
+
+
                 req.flash('error',error)
                 res.redirect('/ProgrammingContest/register')
              }).catch(()=>{
