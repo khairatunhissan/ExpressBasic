@@ -52,18 +52,23 @@ const postPC=(req,res)=>{
              participant.save().then(()=>{
                 error="Team has been registered successfully"
 
-                let allEmails = [leaderemail, member2email, member1email, coachemail];
-                const mailOptions = {
-                    from: 'ictfest7@gmail.com',
-                    to: allEmails,
-                    subject: 'Registration on ICT Fest 2021',
-                    text:
-                      'Your team has been registered successfully for Programming contest. This is the verification Code: ' +
-                      verificationCode,
-                  };
-      
-                  sendMails(mailOptions);
+                let allEmails = [{name:leadername,email:leaderemail}, 
+                    {name:member2name,email:member2email},
+                     {name:member1name, email:member1email},
+                      {name:coachname, email:coachemail}];
 
+
+
+                allEmails.forEach((person) => {
+              const mailOptions = {
+                from: 'ictfest7@gmail.com',
+                to: person.email,
+                subject: 'Registration on ICT Fest 2021',
+                text: `You ${person.name} and your team ${teamname} has successfully registered for programming contest.This is the verification code: ${verificationCode}`,
+              };
+
+              sendMails(mailOptions);
+            });
 
 
                 req.flash('error',error)
