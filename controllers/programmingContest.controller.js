@@ -171,51 +171,75 @@ const selectPC=(req,res)=>{
     })
 }
 
-const geteditPC=(req,res)=>{
-    const id =req.params.id
-    let participantInfo=[]
-    let error =""
-    ProgrammingContest.findOne({_id:id})
-    .then((data)=>{
-        participantInfo=data
-        res.render('programming-contest/edit.ejs',{
-            error:req.flash('error'),
-            participant:participantInfo,
-        })
+const geteditPC = (req, res) => {
+    const id = req.params.id;
+    let info = [];
+    ProgrammingContest.findOne({ _id: id })
+      .then((data) => {
+        info = data;
+       
+        res.render("programming-contest/edit.ejs", {
+          error: req.flash("error"),
+          participant: info,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        error = "Failed to fetch participants";
+        res.render("programming-contest/edit.ejs", {
+          error: req.flash("error", error),
+          participant: info,
+        });
+      });
+  };
 
-    }).catch(()=>{
-        error='Failed to fetch participants'
-        res.render('programming-contest/edit.ejs',{
-            error:req.flash('error',error),
-            participants:participantInfo,
-        })
-    })
-}
-
-const posteditPC=async(req,res)=>{
-    const{teamname,institution,coachname,coachcontact,coachemail,coachtshirt,leadername,leadercontact,leaderemail,leadertshirt,member1name,member1contact,member1email,member1tshirt,member2name,member2contact,member2email,member2tshirt}=req.body
+  const posteditPC = async (req, res) => {
+    const {
+        teamname,
+        institution,
+        coachname,
+        coachcontact,
+        coachemail,
+        coachtshirt,
+        leadername,
+        leadercontact,
+        leaderemail,
+        leadertshirt,
+        member1name,
+        member1contact,
+        member1email,
+        member1tshirt,
+        member2name,
+        member2contact,
+        member2email,
+        member2tshirt,
+        
+    } = req.body;
   
     const data = await ProgrammingContest.findOneAndUpdate(
-      { teamname: teamname, coachname: coachname },
-      {institution,coachcontact,coachemail,coachtshirt,leadername,leadercontact,leaderemail,leadertshirt,member1name,member1contact,member1email,member1tshirt,member2name,member2contact,member2email,member2tshirt}
-    )
-    .then((data)=>{
-        if(data==req.params.teamname||data==req.params.coachname){
-            error="Team name and coach name cannot be edited"
-            req.flash('error',error)
-            res.redirect("/ProgrammingContest/list")
-        }
-        else{
-      error="Team has been edited successfully!!"
+      { teamname: teamname, coachname:coachname },
+      {  institution,
+          coachcontact,
+        coachemail,
+        coachtshirt,
+        leadername,
+        leadercontact,
+        leaderemail,
+        leadertshirt,
+        member1name,
+        member1contact,
+        member1email,
+        member1tshirt,
+        member2name,
+        member2contact,
+        member2email,
+        member2tshirt, }
+    );
+    if (data) {
+        let  error='Team has been edited successfully!!'
         req.flash('error',error)
-        res.redirect("/ProgrammingContest/list")}
-
-    }).catch(()=>{
-        error="Unexpected Error"
-        req.flash('error',error)
-        res.redirect("/ProgrammingContest/list")
-    })
-    
-}
+      res.redirect("/ProgrammingContest/list");
+    }
+  };
 
 module.exports={getPC,postPC,getPCList,deletePC,paymentDonePC,selectPC,geteditPC,posteditPC}
